@@ -20,15 +20,13 @@ const program = createProgram(rootNames, options);
 
 const checker = program.getTypeChecker();
 for (const sourceFile of program.getSourceFiles()) {
-  if(!sourceFile.isDeclarationFile) {
+  if (!sourceFile.isDeclarationFile) {
     delintNode(sourceFile);
   }
 }
 
 function delintNode(node: Node) {
-  if (
-    isAutoImportedIdentifier(node, checker)
-  ) {
+  if (isAutoImportedIdentifier(node, checker)) {
     consola.log(
       `Found auto-imported identifier: ${node.getText()}, at ${node.getSourceFile().fileName}:${node.getStart()}`,
     );
